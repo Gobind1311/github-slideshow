@@ -1,0 +1,35 @@
+from collections import OrderedDict 
+
+function solution(d) : 
+// Using nkey list to manage keys and nvalue list to manage values and then combining both to form a dictionary
+  nkey=[]
+  nvalue=[]
+  for x in d:
+    nkey.append(int(x[8:10]));
+    nvalue.append(d[x])
+    y=x[0:8];
+  a=0;
+  nkey.sort()
+  nvalue.sort()
+  value=0;
+  for x in nkey:
+    value=(nvalue[a+1]-nvalue[a])/(nkey[a+1]-nkey[a])
+  a=0;
+  z=0;
+  while(a<len(nkey)-1):
+    z=nkey[a+1]-nkey[a]
+    if(z!=1):
+        nkey.insert(a+1,1+nkey[a])
+        nvalue.insert(a+1,int(value+nvalue[a]))
+    a=a+1;
+  a=0;
+  while(a<len(nkey)):
+    nkey[a] = y+str(nkey[a])
+    a=a+1;
+  // Using OrderedDict to maintain the order of dictionary elements
+  dictOfWords = OrderedDict()
+  zipbObj = zip(nkey, nvalue)
+ 
+  dictOfWords = dict(zipbObj)
+
+  print(dictOfWords)
